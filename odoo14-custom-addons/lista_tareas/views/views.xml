@@ -1,0 +1,85 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <!-- Definimos como es la vista explicita de la litas-->
+    <record model="ir.ui.view" id="lista_tareas.list">
+      <field name="name">lista_tareas list</field>
+      <field name="model">lista_tareas.lista_tareas</field>
+      <field name="arch" type="xml">
+        <tree decoration-success="realizada == True">
+          <field name="avatar" widget="image" class="oe_avatar"/>
+          <field name="tarea"/>
+          <field name="prioridad" widget="percentpie"/>
+          <field name="urgente"/>
+          <field name="realizada"/>
+          <field name="fecha"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Añado una nueva vista al modulo
+    <record model="ir.ui.view" id="tareas.appointment_calendar">
+      <field name="name">appointment calendar</field>
+      <field name="model">project.travel</field>
+      <field name="arch" type="xml">
+        <calendar string="Appointment Calendar" date_start="date_assign" date_delay="distance" color="project_id"> 
+          <field name="name"/>
+        </calendar>
+      </field>
+    </record>
+
+    <record id='action_tareas_calender' model='ir.actions.act_window'>
+        <field name="name">Mis tareas (Calendario)</field>
+        <field name="res_model">project.travel</field>
+        <field name="view_mode">calendar,tree,form</field>
+        
+        <field name="context">{'calendar_view_ref': 'my_project.tareas.appointment_calender_view'}</field>
+    </record> -->
+
+    <!-- actions opening views on models -->
+    <!-- Acciones al abrir las vistas en los modelos 
+    https://www.odoo.com/documentation/14.0/developer/reference/addons/actions.html
+    -->
+
+    <record model="ir.actions.act_window" id="lista_tareas.action_window">
+      <field name="name">Organiza el tiempo de manera mas eficaz</field>
+      <field name="res_model">lista_tareas.lista_tareas</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <!-- Top menu item -->
+
+    <menuitem name="Listado de tareas" id="lista_tareas.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Menu" id="lista_tareas.menu_1" parent="lista_tareas.menu_root"/>
+
+    <menuitem name="Preferencias" id="lista_tareas.menu_2" parent="lista_tareas.menu_root"/>
+
+    <menuitem name="Community" id="lista_tareas.menu_3" parent="lista_tareas.menu_root"/>
+    <!-- actions -->
+
+    <menuitem name="Desplegar" id="lista_tareas.menu_1_list" parent="lista_tareas.menu_1"
+              />
+
+    <menuitem name="Opcion Primera" id="lista_tareas.menu_1_sublist" parent="lista_tareas.menu_1_list"
+        action="lista_tareas.action_window"      />
+
+    <menuitem name="Opcion Segunda" id="lista_tareas.menu_2_sublist" parent="lista_tareas.menu_1_list"
+        action="lista_tareas.action_window"      />
+              
+    <menuitem name="Volver" id="lista_tareas.menu_3_sublist" parent="lista_tareas.menu_2"
+        action="lista_tareas.action_window"      />
+
+    <menuitem name="Local" id="lista_tareas.menu_4_sublist" parent="lista_tareas.menu_3"
+        action="lista_tareas.action_window"      />
+
+    <menuitem name="Global" id="lista_tareas.menu_5_sublist" parent="lista_tareas.menu_3"
+        action="lista_tareas.action_window"      />
+
+  </data>
+</odoo>
